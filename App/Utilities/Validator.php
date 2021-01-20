@@ -8,7 +8,7 @@ class validator{
       Response::respondeAndDie("Define province id & city name", Response::HTTP_NOT_ACCEPTABLE);
     }
     if(empty($data['province_id']) || empty($data['name'])){
-      Response::respondeAndDie("Enter province id or name", Response::HTTP_NOT_ACCEPTABLE);
+      Response::respondeAndDie("Enter province id and name", Response::HTTP_NOT_ACCEPTABLE);
     }
   }
 

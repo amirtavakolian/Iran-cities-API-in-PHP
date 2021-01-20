@@ -10,28 +10,31 @@ $citiesServiceObj = new citiesService();
 
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
+// If you wana get data from request's body:
+ $requestBodyData = json_decode(file_get_contents("php://input"), true);
+
 switch($requestMethod){
 
   case "get":
-   
       $provinceId = $_GET['province_id'] ?? null;
-
       $data = [
         "province_id" => $provinceId
       ];
 
-      $res = $citiesServiceObj->getCitiess($data);      
-
+      $res = $citiesServiceObj->getCitiess($data); 
+      if(empty($res)){
+        // Baiad status code haie dorost befresti daii :D 
+        Response::respondeAndDie($res, Response::HTTP_NOT_FOUND);
+      }
       Response::respondeAndDie($res, Response::HTTP_OK);
   break;
   
   case "post":
-    $data = $_POST;
-    validator::addProvinceValidator($data, "province_id", "name");
+   
+    validator::addProvinceValidator($requestBodyData, "province_id", "name");
+    $res = $citiesServiceObj->createCity($requestBodyData);
+     Response::respondeAndDie($res, Response::HTTP_CREATED);
     
-    $res = $citiesServiceObj->createCity($data);
-    echo $res;
-
     break;
 
   case "update":
