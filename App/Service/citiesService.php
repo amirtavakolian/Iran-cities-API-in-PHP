@@ -13,6 +13,11 @@ class citiesService {
     return addCity($data);
   }
 
+  public function updateCityName($city_id, $city_name){
+    return changeCityName($city_id, $city_name);
+  }
+
+
   public function deleteCity($data) {
     return deleteCity($data);
   }

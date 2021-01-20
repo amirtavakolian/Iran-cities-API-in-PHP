@@ -15,7 +15,7 @@ $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
 switch($requestMethod){
 
-  case "get":
+case "get":
       $provinceId = $_GET['province_id'] ?? null;
       $data = [
         "province_id" => $provinceId
@@ -27,21 +27,21 @@ switch($requestMethod){
         Response::respondeAndDie($res, Response::HTTP_NOT_FOUND);
       }
       Response::respondeAndDie($res, Response::HTTP_OK);
-  break;
   
-  case "post":
-   
-    validator::addProvinceValidator($requestBodyData, "province_id", "name");
-    $res = $citiesServiceObj->createCity($requestBodyData);
-     Response::respondeAndDie($res, Response::HTTP_CREATED);
+  case "post":      
+      validator::addProvinceValidator($requestBodyData, "province_id", "name");
+      $res = $citiesServiceObj->createCity($requestBodyData);
+      Response::respondeAndDie($res, Response::HTTP_CREATED);
     
-    break;
-
-  case "update":
-    Response::respondeAndDie($res, Response::HTTP_OK);
+    case "put":
+      [$cityId, $cityName] = [$requestBodyData['city_id'],$requestBodyData['city_name']];
+      validator::updateCityName($cityId, $cityName);
+      $res = $citiesServiceObj->updateCityName($cityId, $cityName);
+      Response::respondeAndDie($res, Response::HTTP_OK);
 
   case "delete":
-    $res = $citiesServiceObj->deleteCity($requestBodyData['city_id']);
-    
-      
+    $cityId = $requestBodyData['city_id'];
+    validator::deleteCity($cityId);
+    $res = $citiesServiceObj->deleteCity($cityId);
+    Response::respondeAndDie($res, Response::HTTP_OK);
 }

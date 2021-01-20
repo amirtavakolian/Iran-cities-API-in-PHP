@@ -78,6 +78,7 @@ function changeCityName($city_id,$name){
     $stmt->execute();
     return $stmt->rowCount();
 }
+
 function changeProvinceName($province_id,$name){
     global $pdo;
     $sql = "update province set name = '$name' where id = $province_id";

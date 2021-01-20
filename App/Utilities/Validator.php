@@ -12,4 +12,21 @@ class validator{
     }
   }
 
+  public static function updateCityName($cityId, $cityName){
+    if(!is_numeric($cityId) or empty($cityId)){
+      Response::respondeAndDie("Id is not valid", Response::HTTP_NOT_ACCEPTABLE);
+    }
+
+    if(empty($cityName) or !is_string($cityName)){
+      Response::respondeAndDie("Enter city name", Response::HTTP_NOT_ACCEPTABLE);
+    }
+
+  }
+
+  public static function deleteCity($cityId){
+    if(!is_numeric($cityId) or empty($cityId)){
+      Response::respondeAndDie("Id is not valid", Response::HTTP_NOT_ACCEPTABLE);
+    }
+  }
+
 }
