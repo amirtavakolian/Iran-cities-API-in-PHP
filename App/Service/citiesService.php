@@ -13,5 +13,8 @@ class citiesService {
     return addCity($data);
   }
 
+  public function deleteCity($data) {
+    return deleteCity($data);
+  }
 
 }

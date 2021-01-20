@@ -41,6 +41,7 @@ switch($requestMethod){
     Response::respondeAndDie($res, Response::HTTP_OK);
 
   case "delete":
-    Response::respondeAndDie($res, Response::HTTP_OK);
+    $res = $citiesServiceObj->deleteCity($requestBodyData['city_id']);
+    
       
 }
