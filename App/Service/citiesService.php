@@ -9,5 +9,9 @@ class citiesService {
     return getCities($data);
   }
 
+  public function createCity($data) {
+    return addCity($data);
+  }
+
 
 }
